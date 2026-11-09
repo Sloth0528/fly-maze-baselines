@@ -94,7 +94,7 @@ python run_lstm.py init --seed 123 --output outputs/lstm_untrained_seed123.pt
 
 ## 地圖與環境
 
-共同輸入 31 維：13 條射線距離、13 個可見食物指標、朝向 cos/sin、上次兩個動作、碰撞狀態。輸出 `[throttle 0..1, steering -1..1]`，控制連續座標與旋轉，支援斜向與弧線移動。模型不接收整張地圖或預先計算的路徑。
+共同輸入 31 維：13 條射線距離、13 個可見食物指標、朝向 cos/sin、上次兩個動作、碰撞狀態。輸出 `[throttle 0..1, steering -1..1]`，控制連續座標與旋轉，支援斜向與弧線移動。模型不接收整張地圖或預先計算的路徑。隨機起點只抽取可達路格中心及隨機朝向，排除目標格，避免一出生就被計為成功。
 
 預設使用原本的小地圖。可用 `--difficulty easy` / `medium` / `hard` 產生地圖；訓練時加 `--vary-maze` 每回合換圖。`--maze examples/open_maze.txt` 可載入自訂 TXT，接受 `#` 牆、`.` 路、`S` 起點、`G` 目標；需要封閉邊界且起點可達目標。`--maze` 與 `--difficulty` 擇一。
 

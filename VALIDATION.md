@@ -16,7 +16,7 @@
 
 ## 已通過的本機檢查
 
-`python -m unittest tests.test_baselines -v`：9 項通過。
+`python -m unittest tests.test_baselines -v`：10 項通過。
 
 - 實際使用三種不同 PyTorch backbone，重設記憶可重現初始輸出。
 - 模型動作進入連續環境，下一次觀察含上次動作；預覽與評估不改變模型權重。
@@ -25,6 +25,7 @@
 - checkpoint round-trip、跨架構拒絕、拒絕覆寫。
 - 每個架構在暫存目錄執行 2 回合、6 次 optimizer 更新，確認 backbone 確實改變、可存讀並評估；測後三份隨附模型 SHA256 不變。
 - 斜向位移、碰撞、不可達地圖拒絕。
+- 隨機起點排除目標格，100 次 reset 均未出生於目標範圍。
 - 三個 CLI 皆可從不相關工作目錄啟動並完成 check。
 
 `python -m unittest tests.test_viewer -v`：1 項通過，涵蓋三個架構的 Tk 視窗建立、繪製、模型控制一步、重設。

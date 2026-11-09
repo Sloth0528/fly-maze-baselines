@@ -1,6 +1,7 @@
 """Behavior tests; any test training stays inside a temporary directory."""
 
 import hashlib
+import math
 from pathlib import Path
 import subprocess
 import sys
@@ -18,6 +19,13 @@ torch.set_num_threads(1)
 
 
 class BaselineTests(unittest.TestCase):
+    def test_random_start_does_not_spawn_inside_goal(self):
+        env = ContinuousMaze(seed=40007)
+        for _ in range(100):
+            env.reset(random_start=True)
+            distance = math.hypot(env.fly.x-env.goal[0]-.5, env.fly.y-env.goal[1]-.5)
+            self.assertGreater(distance, env.goal_radius)
+
     def test_bundled_weights_are_untrained_and_match_fresh_seed42(self):
         for kind in KINDS:
             with self.subTest(kind=kind):

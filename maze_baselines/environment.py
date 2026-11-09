@@ -60,7 +60,8 @@ class ContinuousMaze:
         self.layout = reference.layout
         self.width, self.height = reference.width, reference.height
         self.start, self.goal = reference.start, reference.goal
-        self.start_candidates = reference.start_candidates
+        # An episode must not count as solved simply because reset chose G.
+        self.start_candidates = [point for point in reference.start_candidates if point != self.goal]
         self.walls = [(x, y) for y, row in enumerate(self.layout)
                       for x, tile in enumerate(row) if tile == "#"]
 
