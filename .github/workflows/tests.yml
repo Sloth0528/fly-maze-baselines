@@ -1,0 +1,37 @@
+name: Windows and Apple Silicon macOS
+
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  headless:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-14]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install exact initialization test environment on Windows
+        if: runner.os == 'Windows'
+        run: python -m pip install torch==2.14.1 numpy==2.5.2 --index-url https://download.pytorch.org/whl/cpu
+      - name: Install exact initialization test environment on macOS
+        if: runner.os == 'macOS'
+        run: python -m pip install torch==2.14.1 numpy==2.5.2
+      - run: python -m unittest tests.test_baselines -v
+      - run: python run_gru.py check
+      - run: python run_lstm.py check
+      - run: python run_transformer.py check
+      - name: Validate Mac launcher syntax
+        if: runner.os == 'macOS'
+        run: |
+          bash -n START_GRU.command
+          bash -n START_LSTM.command
+          bash -n START_TRANSFORMER.command

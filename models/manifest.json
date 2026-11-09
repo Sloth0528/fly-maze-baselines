@@ -1,0 +1,55 @@
+{
+  "project_version": "1.0.0",
+  "torch_version": "2.14.1+cpu",
+  "seed": 42,
+  "models": {
+    "gru": {
+      "file": "gru_untrained.pt",
+      "sha256": "1fea2cef59aa3460dea425ae4dca04274d65f98a1e039ca8cd37aa86266eeaf8",
+      "brain": {
+        "kind": "gru",
+        "observation_size": 31,
+        "hidden_size": 64
+      },
+      "status": "untrained",
+      "episodes": 0,
+      "optimizer_updates": 0,
+      "seed": 42,
+      "algorithm": "random_initialization",
+      "trainable_parameters": 27205
+    },
+    "lstm": {
+      "file": "lstm_untrained.pt",
+      "sha256": "be408f051386a23f2d5434fc3913d45ad31aec6b0b4cdf94036bf625ef7e9bc6",
+      "brain": {
+        "kind": "lstm",
+        "observation_size": 31,
+        "hidden_size": 64
+      },
+      "status": "untrained",
+      "episodes": 0,
+      "optimizer_updates": 0,
+      "seed": 42,
+      "algorithm": "random_initialization",
+      "trainable_parameters": 35525
+    },
+    "transformer": {
+      "file": "transformer_untrained.pt",
+      "sha256": "f4447564453d70160ae64747a2fbe00a7631ef5e5fbd4bbce9757978e0befd06",
+      "brain": {
+        "kind": "transformer",
+        "observation_size": 31,
+        "hidden_size": 64,
+        "context": 32,
+        "heads": 4,
+        "layers": 2
+      },
+      "status": "untrained",
+      "episodes": 0,
+      "optimizer_updates": 0,
+      "seed": 42,
+      "algorithm": "random_initialization",
+      "trainable_parameters": 71237
+    }
+  }
+}
